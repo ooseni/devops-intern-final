@@ -40,4 +40,27 @@ chmod +x scripts/sysinfo.sh
 ### Step 2 Verification Screenshot
 ![Step 2 - SysInfo Output](screenshots/step2_sysinfo_output.png)
 
+---
+
+## 🛠️ Step 3: Docker Basics
+- Created [Dockerfile](Dockerfile) using official `python:3.11-slim` base image.
+- Set working directory `/app` and configured non-root security user `devopsuser`.
+- Container runs `python hello.py` on startup.
+
+### Building & Running the Docker Container
+
+**1. Build the Docker image:**
+```bash
+docker build -t hello-devops:latest .
+```
+
+**2. Run the Docker container:**
+```bash
+docker run --rm hello-devops:latest
+```
+
+### Step 3 Verification Screenshot
+![Step 3 - Docker Build & Run Output](screenshots/step3_docker_run.png)
+
+
 
