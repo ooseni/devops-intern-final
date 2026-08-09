@@ -1,0 +1,83 @@
+==============================================================================
+Grafana Loki & Promtail Setup Instructions
+DevOps Intern Final Assessment - Step 6
+Candidate: Oseni Sakariyau Oluwadamilare
+==============================================================================
+
+1. Overview
+------------------------------------------------------------------------------
+Grafana Loki is a horizontally-scalable, highly-available log aggregation system. 
+This document outlines how to deploy Grafana Loki locally via Docker and forward 
+logs from the `hello-devops` container / Nomad service tasks to Loki for centralized 
+log querying and visualization.
+
+2. Running Grafana Loki & Promtail via Docker
+------------------------------------------------------------------------------
+Step A: Create Loki configuration file (loki-config.yaml)
+---------------------------------------------------------
+cat << 'EOF' > loki-config.yaml
+auth_enabled: false
+
+server:
+  http_listen_port: 3100
+
+ingester:
+  lifecycler:
+    address: 127.0.0.1
+    ring:
+      kvstore:
+        store: inmemory
+      replication_factor: 1
+  chunk_idle_period: 5m
+  chunk_retain_period: 30s
+
+schema_config:
+  configs:
+    - from: 2020-05-15
+      store: boltdb-shipper
+      object_store: filesystem
+      schema: v11
+      index:
+        prefix: index_
+        period: 24h
+
+storage_config:
+  boltdb_shipper:
+    active_index_directory: /tmp/loki/index
+    cache_location: /tmp/loki/cache
+    shared_store: filesystem
+  filesystem:
+    directory: /tmp/loki/chunks
+
+limits_config:
+  enforce_metric_name: false
+  reject_old_samples: true
+  reject_old_samples_max_age: 168h
+EOF
+
+Step B: Start Loki Container
+----------------------------
+docker run -d --name loki -p 3100:3100 -v $(pwd)/loki-config.yaml:/etc/loki/local-config.yaml grafana/loki:latest -config.file=/etc/loki/local-config.yaml
+
+Step C: Start Promtail (Log Collector)
+--------------------------------------
+docker run -d --name promtail -v /var/log:/var/log -v /var/lib/docker/containers:/var/lib/docker/containers:ro grafana/promtail:latest -config.file=/etc/promtail/config.yml
+
+3. Forwarding Docker / Nomad Container Logs to Loki
+------------------------------------------------------------------------------
+Option A: Using Docker Loki Logging Driver
+docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
+docker run --log-driver=loki --log-opt loki-url="http://localhost:3100/loki/api/v1/push" --log-opt loki-batch-size="400" hello-devops:latest
+
+Option B: Accessing Grafana Dashboard UI
+docker run -d --name=grafana -p 3000:3000 grafana/grafana
+Navigate to http://localhost:3000 (admin/admin), add Loki Data Source (http://loki:3100).
+
+4. Commands to View & Query Logs
+------------------------------------------------------------------------------
+To query Loki HTTP API directly using curl:
+curl -G -s "http://localhost:3100/loki/api/v1/query_range" --data-urlencode 'query={container_name="hello-devops"}' | jq
+
+To view live log streams using LogCLI:
+logcli --addr="http://localhost:3100" query '{container_name="hello-devops"}'
+==============================================================================

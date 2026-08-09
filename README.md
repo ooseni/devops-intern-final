@@ -97,6 +97,26 @@ nomad job status hello-devops
 ### Step 5 Verification Screenshot
 ![Step 5 - Nomad Job Deployment Status](screenshots/step5_nomad_status.png)
 
+---
+
+## 🛠️ Step 6: Monitoring with Grafana Loki
+- Created Loki & Promtail setup guide [monitoring/loki_setup.txt](monitoring/loki_setup.txt).
+- Outlines running Loki locally via Docker (`grafana/loki:latest`).
+- Details log forwarding configuration and log querying commands via `logcli`, `curl`, and Grafana dashboard UI.
+
+### Querying Loki Logs
+```bash
+# Query via LogCLI
+logcli --addr="http://localhost:3100" query '{container_name="hello-devops"}'
+
+# Query via HTTP API (curl)
+curl -G -s "http://localhost:3100/loki/api/v1/query_range" --data-urlencode 'query={container_name="hello-devops"}'
+```
+
+### Step 6 Verification Screenshot
+![Step 6 - Grafana Loki Query Output](screenshots/step6_loki_dashboard.png)
+
+
 
 
 
