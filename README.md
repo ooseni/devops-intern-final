@@ -75,6 +75,29 @@ docker run --rm hello-devops:latest
 ### Step 4 Verification Screenshot
 ![Step 4 - CI Pipeline Status](screenshots/step4_cicd_badge.png)
 
+---
+
+## 🛠️ Step 5: Job Deployment with Nomad
+- Created Nomad job specification [nomad/hello.nomad](nomad/hello.nomad).
+- Configured service task (`type = "service"`) using Docker driver.
+- Configured minimal resource limits (100 MHz CPU, 64 MB RAM).
+
+### Deploying & Managing the Nomad Job
+
+**1. Run the Nomad job:**
+```bash
+nomad job run nomad/hello.nomad
+```
+
+**2. Check job status:**
+```bash
+nomad job status hello-devops
+```
+
+### Step 5 Verification Screenshot
+![Step 5 - Nomad Job Deployment Status](screenshots/step5_nomad_status.png)
+
+
 
 
 
