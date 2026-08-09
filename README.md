@@ -116,6 +116,21 @@ curl -G -s "http://localhost:3100/loki/api/v1/query_range" --data-urlencode 'que
 ### Step 6 Verification Screenshot
 ![Step 6 - Grafana Loki Query Output](screenshots/step6_loki_dashboard.png)
 
+---
+
+## 🛠️ Step 7: Extra Credit (MLflow Tracking)
+- Created dummy MLflow tracking script [mlflow/train_dummy.py](mlflow/train_dummy.py).
+- Logs hyperparameters (`learning_rate`, `batch_size`, `epochs`) and evaluation metrics (`accuracy`, `loss`).
+
+### Running MLflow Tracking Script
+```bash
+python mlflow/train_dummy.py
+```
+
+### Step 7 Verification Screenshot
+![Step 7 - MLflow Experiment Tracking Output](screenshots/step7_mlflow_tracking.png)
+
+
 
 
 
