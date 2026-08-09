@@ -22,3 +22,22 @@ python hello.py
 ### Step 1 Verification Screenshot
 ![Step 1 - Hello DevOps Output](screenshots/step1_hello_output.png)
 
+---
+
+## 🛠️ Step 2: Linux & Scripting Basics
+- Created executable shell script [scripts/sysinfo.sh](scripts/sysinfo.sh).
+- Gathers and displays system details:
+  - Current user (`whoami`)
+  - Current date and time (`date`)
+  - Disk usage (`df -h`)
+
+### Running `sysinfo.sh`
+```bash
+chmod +x scripts/sysinfo.sh
+./scripts/sysinfo.sh
+```
+
+### Step 2 Verification Screenshot
+![Step 2 - SysInfo Output](screenshots/step2_sysinfo_output.png)
+
+
