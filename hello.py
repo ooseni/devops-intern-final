@@ -1,7 +1,7 @@
 """
 Hello DevOps Sample Application
 DevOps Intern Final Assessment - Step 1
-Candidate: ooseni
+Candidate: Oseni Sakariyau Oluwadamilare
 """
 
 import sys

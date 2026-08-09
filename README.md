@@ -3,7 +3,7 @@
 ## 📌 Project Overview
 This repository contains the complete step-by-step solution for the **DevOps Intern Final Assessment**. It demonstrates an end-to-end DevOps pipeline incorporating Linux shell scripting, Docker containerization, CI/CD automation with GitHub Actions, container orchestration with HashiCorp Nomad, and log aggregation with Grafana Loki.
 
-**Candidate Name:** ooseni  
+**Candidate Name:** Oseni Sakariyau Oluwadamilare  
 **Date:** August 2026  
 **Repository:** `devops-intern-final`  
 
