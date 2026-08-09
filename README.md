@@ -1,5 +1,7 @@
 # DevOps Intern Final Assessment 🚀
 
+[![DevOps CI Pipeline](https://github.com/ooseni/devops-intern-final/actions/workflows/ci.yml/badge.svg)](https://github.com/ooseni/devops-intern-final/actions)
+
 ## 📌 Project Overview
 This repository contains the complete step-by-step solution for the **DevOps Intern Final Assessment**. It demonstrates an end-to-end DevOps pipeline incorporating Linux shell scripting, Docker containerization, CI/CD automation with GitHub Actions, container orchestration with HashiCorp Nomad, and log aggregation with Grafana Loki.
 
@@ -61,6 +63,18 @@ docker run --rm hello-devops:latest
 
 ### Step 3 Verification Screenshot
 ![Step 3 - Docker Build & Run Output](screenshots/step3_docker_run.png)
+
+---
+
+## 🛠️ Step 4: CI/CD with GitHub Actions
+- Created workflow [.github/workflows/ci.yml](.github/workflows/ci.yml).
+- Automatically triggers on `push` and `pull_request` to `main`.
+- Automates execution of `hello.py`, `sysinfo.sh`, and Docker image build & verification test.
+- Embedded live build status badge at the top of `README.md`.
+
+### Step 4 Verification Screenshot
+![Step 4 - CI Pipeline Status](screenshots/step4_cicd_badge.png)
+
 
 
 
