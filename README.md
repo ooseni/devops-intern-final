@@ -100,9 +100,11 @@ nomad job status hello-devops
 ---
 
 ## 🛠️ Step 6: Monitoring with Grafana Loki
-- Created Loki & Promtail setup guide [monitoring/loki_setup.txt](monitoring/loki_setup.txt).
-- Outlines running Loki locally via Docker (`grafana/loki:latest`).
-- Details log forwarding configuration and log querying commands via `logcli`, `curl`, and Grafana dashboard UI.
+- Configured actual Infrastructure as Code (IaC) monitoring stack files in `monitoring/`:
+  - `docker-compose.yml`: Deploys Loki, Promtail, and Grafana in one command.
+  - `loki-config.yml`: Core Grafana Loki server configuration.
+  - `promtail-config.yml`: Log collection configuration for Docker container logs.
+- Added Loki & Promtail setup guide [monitoring/loki_setup.txt](monitoring/loki_setup.txt) detailing `docker-compose up -d` execution.
 
 ### Querying Loki Logs
 ```bash
