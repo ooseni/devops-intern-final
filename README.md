@@ -138,3 +138,7 @@ python mlflow/train_dummy.py
 
 
 
+
+## License
+
+Released under the [MIT License](LICENSE).
